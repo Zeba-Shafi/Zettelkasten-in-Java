@@ -16,6 +16,7 @@ public class PermenantNote extends Note {
         System.out.println("Loading permanent note: " + title);
     }
 
+    
     @Override
     public void deleteNote(String title) {
         // Implementation for deleting a permanent note

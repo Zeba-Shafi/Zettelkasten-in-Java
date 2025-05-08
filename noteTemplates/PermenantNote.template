@@ -1,0 +1,20 @@
+
+---
+type: permenant
+tags: {tags}
+dateCreated: {dateCreated}
+dateModified: {dateModified}
+literatureSource: {litSourceLink}
+---
+
+## Notes
+{content}
+
+
+
+## Footnotes
+### Source Literature Note
+[{LiteratureNote}]({LitNoteUUID}.md)
+
+### See Also
+

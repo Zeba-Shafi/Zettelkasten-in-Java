@@ -1,6 +1,8 @@
 public class LitNote extends Note {
 
     private String author;
+    private String sourceURL;
+    private String citation;
     private String publicationDate;
 
     public LitNote(String title, String content, String tags, String dateCreated, String dateModified, String author, String publicationDate) {
@@ -39,6 +41,21 @@ public class LitNote extends Note {
 
     public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public String getCitation() {
+        return citation;
+    }
+    public void setCitation(String citation) {
+        this.citation = citation;
+    }
+    
+    public void setSourceURL(String sourceURL) {
+        this.sourceURL = sourceURL;
+    }
+
+    public String getSourceURL() {
+        return sourceURL;
     }
     
 }
