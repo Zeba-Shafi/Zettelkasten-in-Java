@@ -17,8 +17,8 @@ public class FleetingNote extends Note {
     }
 
     @Override
-    public void deleteNote(String title) {
-        // Implementation for deleting a fleeting note
+    public void deleteNote() {
+        
         System.out.println("Deleting fleeting note: " + title);
     }
 }

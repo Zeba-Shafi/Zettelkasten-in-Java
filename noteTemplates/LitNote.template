@@ -1,0 +1,17 @@
+---
+type: literature
+tags: {tags}
+datecreated: {dateCreated}
+modified: {dateModified}
+Author: {author}
+Source: {url}
+---
+
+{content}
+
+
+## Reference
+
+## Outgoing Permenant Notes
+
+
