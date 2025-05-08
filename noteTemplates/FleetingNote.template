@@ -3,3 +3,5 @@ title: {title}
 tags: {listTags}
 dateCreated: {dateCreated}
 ---
+
+{content}

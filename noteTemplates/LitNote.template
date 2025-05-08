@@ -3,15 +3,15 @@ type: literature
 tags: {tags}
 datecreated: {dateCreated}
 modified: {dateModified}
-Author: {author}
-Source: {url}
+author: {author}
 ---
 
 {content}
 
-
 ## Reference
+[{citation}]({url})
 
 ## Outgoing Permenant Notes
+
 
 

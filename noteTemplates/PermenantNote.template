@@ -1,16 +1,17 @@
-## {title}
 
-Type: permenant
-Tags: {tags}
-Created: {dateCreated}
-Modified: {dateModified}
-Links: {links}
-LiteratureSource: {litSourceLink}
+---
+type: permenant
+tags: {tags}
+dateCreated: {dateCreated}
+dateModified: {dateModified}
+literatureSource: {litSourceLink}
+---
 
 {content}
 
 
 ## Source Literature
+[{LiteratureNote}]({LitNoteUUID}.md)
 
 ## See Also
 
