@@ -37,6 +37,25 @@ public class MDParser {
         return links;
     }
 
+    // Method to extract metadata from the markdown content
+    public static Map<String, String> extractMetadata(String markdown) {
+        // This method would parse the YAML front matter and return it as a map
+        // For simplicity, let's assume we have a method that does this
+        Map<String, String> metadata = new HashMap<>();
+        // Parse the YAML front matter and populate the metadata map
+        return metadata;
+    }
+
+    // Method to extract content from the markdown file
+    public static String extractContent(String markdown) {
+        // This method would extract the main content from the markdown file
+        // For simplicity, let's assume we have a method that does this
+        // Using flexmark extract content after t
+        
+        String content = markdown; // Placeholder for actual content extraction logic
+        return content;
+    }
+
     
 
     

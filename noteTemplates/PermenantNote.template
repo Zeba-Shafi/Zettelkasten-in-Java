@@ -7,11 +7,14 @@ dateModified: {dateModified}
 literatureSource: {litSourceLink}
 ---
 
+## Notes
 {content}
 
 
-## Source Literature
+
+## Footnotes
+### Source Literature Note
 [{LiteratureNote}]({LitNoteUUID}.md)
 
-## See Also
+### See Also
 

@@ -5,13 +5,14 @@ datecreated: {dateCreated}
 modified: {dateModified}
 author: {author}
 ---
-
+## Notes
 {content}
 
-## Reference
+## Footnote
+### Reference
 [{citation}]({url})
 
-## Outgoing Permenant Notes
+### Outgoing Permenant Notes
 
 
 

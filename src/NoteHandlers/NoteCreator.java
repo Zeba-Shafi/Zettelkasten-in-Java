@@ -6,7 +6,7 @@ public abstract class NoteCreator {
             case "fleetingnote":
                 return new FleetingNote(title, content, tags, dateCreated, dateModified);
             case "permanentnote":
-                return new PermanentNote(title, content, tags, dateCreated, dateModified);
+                return new PermanentNote(title, content, tags, dateCreated, dateModified,author);
             default:
                 throw new IllegalArgumentException("Unknown note type: " + type);
         }
