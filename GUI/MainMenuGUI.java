@@ -35,7 +35,8 @@ public class MainMenuGUI extends JFrame{
 		noteButton = new JButton("Create Note");
 		noteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				NoteGUI noteFrame = new NoteGUI();
+				noteFrame.setVisible(true);
 			}
 		});
 		noteButton.setBounds(95, 46, 117, 29);
@@ -58,7 +59,9 @@ public class MainMenuGUI extends JFrame{
 		inboxButton = new JButton("View Inbox");
 		inboxButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				InboxGUI inboxFrame = new InboxGUI();
+				inboxFrame.setVisible(true);
+				dispose();
 			}
 		});
 		inboxButton.setBounds(95, 86, 117, 29);

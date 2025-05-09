@@ -11,8 +11,8 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BrowseGUI extends JFrame{
-	
+public class InboxGUI extends JFrame{
+
 	private JPanel contentPane;
 	private JList<String> noteList;
 	private JScrollPane scrollPane;
@@ -22,7 +22,7 @@ public class BrowseGUI extends JFrame{
 	private JTextField textField;
 	private JLabel label;
 	
-public BrowseGUI() {
+public InboxGUI() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 464, 201);
@@ -83,5 +83,5 @@ public BrowseGUI() {
 		contentPane.add(viewButton);
 		
 	}
-
+	
 }
