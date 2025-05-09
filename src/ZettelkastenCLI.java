@@ -1,4 +1,4 @@
-import java.util.Scanner;
+/* import java.util.Scanner;
 
 public class ZettelkastenCLI {
     private static Index index = Index.getInstance(); // Singleton Index for managing notes
@@ -177,4 +177,4 @@ public class ZettelkastenCLI {
     private static String getCurrentDate() {
         return java.time.LocalDate.now().toString();
     }
-}
+} */

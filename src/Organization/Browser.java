@@ -1,3 +1,5 @@
+package Organization;
+
 public class Browser {
     
 
@@ -12,6 +14,16 @@ public class Browser {
     // Search only Permanent Notes
 
     // Search only Literature Notes
+
+    // Search by Tag 
+
+    // Order by Date Created
+
+    // Order by Date Modified
+
+    // Order by Title
+
+    
 
     
 }
