@@ -2,6 +2,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -40,64 +41,42 @@ public class Test {
     
 
     public static void main(String[] args) {
-       
+        // Create a list to hold all notes
+        List<Note> notes = new ArrayList<>();
 
-        
-       
-        FleetingNote fleetingNote = NoteCreator.createFleetingNote("C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOP Final\\Zettelkasten-in-Java\\Zettelkasten\\FleetingNote_37dd4298-c6a4-4965-a5b2-7dc26e0da70d.md");
-       
-        PermanentNote permanentNote = NoteCreator.createPermanentNote("C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOP Final\\Zettelkasten-in-Java\\Zettelkasten\\PermanentNote_aa305a49-81a0-4ab1-9aaa-d67a270d88e4.md");
-
-        LitNote litNote = NoteCreator.createLitNote("C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOP Final\\Zettelkasten-in-Java\\Zettelkasten\\LiteratureNote_8682bf69-cf58-4dbb-b46d-4c4afe17d7e3.md");
-        
-        
-    
-        viewNotePerm(permanentNote);
-        System.out.println();
-
-        litNote.setTitle("Updated Title");
-        litNote.setContent("Updated Content");
-        
-        //permanentNote.addTag("tag5");
-        
-        //generate a new UUID
-
-        UUID uuid = UUID.randomUUID();
-
-        // Convert UUID to string
-        String uuidString = uuid.toString();
-        UUID uuid1 = UUID.randomUUID();
-
-
-        // Convert UUID to string
-        String uuidString1 = uuid1.toString();
-    
-        permanentNote.addTag("tagfoo");
-        
-        viewNotePerm(permanentNote);
-
-
-        // Create a new file in the markdown directory
-        /* File file = new File(markdownDir + "test.md");
-        try {
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        // Add 5 fleeting notes
+        for (int i = 1; i <= 5; i++) {
+            FleetingNote fleetingNote = NoteCreator.createFleetingNote(
+                "C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOPFinal\\Zettelkasten-in-Java\\Zettelkasten\\FleetingNote_" + UUID.randomUUID() + ".md"
+            );
+            notes.add(fleetingNote);
         }
 
-        // Write to the file
-        try {
-            Files.write(Paths.get(file.getPath()), "Hello, World!".getBytes());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        } */
+        // Add 5 permanent notes
+        for (int i = 1; i <= 5; i++) {
+            PermanentNote permanentNote = NoteCreator.createPermanentNote(
+                "C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOPFinal\\Zettelkasten-in-Java\\Zettelkasten\\PermanentNote_" + UUID.randomUUID() + ".md"
+            );
+            notes.add(permanentNote);
+        }
 
+        // Add 5 literature notes
+        for (int i = 1; i <= 5; i++) {
+            LitNote litNote = NoteCreator.createLitNote(
+                "C:\\Users\\zs132\\OneDrive - nyu.edu\\Documents\\OOPFinal\\Zettelkasten-in-Java\\Zettelkasten\\LiteratureNote_" + UUID.randomUUID() + ".md"
+            );
+            notes.add(litNote);
+        }
+
+        // Print all notes to verify
+        for (Note note : notes) {
+            if (note instanceof FleetingNote) {
+                System.out.println("Fleeting Note: " + note.getTitle());
+            } else if (note instanceof PermanentNote) {
+                System.out.println("Permanent Note: " + note.getTitle());
+            } else if (note instanceof LitNote) {
+                System.out.println("Literature Note: " + note.getTitle());
+            }
+        }
     }
 }

@@ -239,4 +239,20 @@ public class Index {
 
     }
 
+    //return inverted index
+    public Map<String, Set<Note>> getInvertedIndex() {
+        return invertedIndex;
+    }
+
+    // return notes by ID
+    public Map<String, Note> getNotesByID() {
+        return notesByID;
+    }
+
+    // return backlinks index
+    public Map<String, Set<Note>> getBacklinksIndex() {
+        return backlinksIndex;
+    }
+
+
 }

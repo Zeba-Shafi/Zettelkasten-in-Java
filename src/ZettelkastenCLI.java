@@ -1,11 +1,15 @@
-/* import java.util.Scanner;
+import java.util.Scanner;
+
+import Organization.*;
 
 public class ZettelkastenCLI {
-    private static Index index = Index.getInstance(); // Singleton Index for managing notes
+    /* private static Index index = Index.getInstance(); // Singleton Index for managing notes
+    private static Inbox inbox = Inbox.getInstance(); // Singleton Inbox for managing fleeting notes
 
+    // Main method to run the CLI
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Zettelkasten CLI!");
+        System.out.println("Welcome to Zettelkasten CLI");
         System.out.println("Type 'help' to see available commands.");
 
         while (true) {
@@ -176,5 +180,5 @@ public class ZettelkastenCLI {
 
     private static String getCurrentDate() {
         return java.time.LocalDate.now().toString();
-    }
-} */
+    } */
+}

@@ -22,7 +22,6 @@ public class PermanentNote extends Note {
     public PermanentNote(String filePath) {
         super(filePath);
         this.links = MDParser.extractLinks(filePath);
-
         
     }
 
