@@ -75,6 +75,11 @@ public class Index {
         }
 
         System.out.println("Indexing completed.");
+
+        // Rebuild the backlinks index after all notes are indexed
+        System.out.println("Rebuilding backlinks index...");
+        rebuildBacklinksIndex();
+        System.out.println("Backlinks index rebuilt.");
     }
 
     // Build the index from a collection of notes
@@ -89,6 +94,32 @@ public class Index {
 
         }
     }
+
+    //method to add note to existing noteByIndex() 
+    public void addNoteToIndex(Note note) {
+        if (note != null) {
+            notesByID.put(note.getUniqueID(), note); // Add note to notesByID map
+            indexNote(note); // Index the note's content
+            if (note instanceof LitNote) {
+                indexLitNoteLinks((LitNote) note); // Index links if it's a LitNote
+            } else if (note instanceof PermanentNote) {
+                indexPermanentNoteLinks((PermanentNote) note); // Index links if it's a PermanentNote
+            }
+        }
+
+        // Update backlinks index with this note
+        if (note instanceof LitNote) {
+            for (String link : ((LitNote) note).getLinks()) {
+            backlinksIndex.computeIfAbsent(link, k -> new HashSet<>()).add(note);
+            }
+        } else if (note instanceof PermanentNote) {
+            for (String link : ((PermanentNote) note).getLinks()) {
+            backlinksIndex.computeIfAbsent(link, k -> new HashSet<>()).add(note);
+            }
+        }
+    }
+
+    
 
     // Index a single note
     public void indexNote(Note note) {
@@ -183,7 +214,23 @@ public class Index {
 
     // Get backlinks for a specific note
     public Set<Note> getBacklinks(String noteID) {
-        return backlinksIndex.getOrDefault(noteID, Collections.emptySet());
+        // Debug: Print the note ID being queried
+        System.out.println("Getting backlinks for note ID: " + noteID);
+
+        // Check if backlinks exist for the given note ID
+        if (backlinksIndex.containsKey(noteID)) {
+            Set<Note> backlinks = backlinksIndex.get(noteID);
+            // Debug: Print the backlinks found
+            System.out.println("Backlinks found: ");
+            for (Note note : backlinks) {
+                System.out.println("- " + note.getUniqueID() + ": " + note.getTitle());
+            }
+            return backlinks;
+        } else {
+            // Debug: No backlinks found
+            System.out.println("No backlinks found for note ID: " + noteID);
+            return new HashSet<>();
+        }
     }
 
     //delete a note from the index
@@ -233,11 +280,7 @@ public class Index {
         }
     }
 
-    public void addNote(Note note) {
-        notesByID.put(note.getUniqueID(), note);
-        indexNote(note);
-    }
-
+    
     public Collection<Note> getAllNotes() {
         return notesByID.values();
     }
@@ -292,5 +335,40 @@ public class Index {
         return backlinksIndex;
     }
 
+    public void rebuildBacklinksIndex() {
+        // Clear the existing backlinksIndex
+        backlinksIndex.clear();
 
+        // Iterate through all notes in notesByID
+        for (Note note : notesByID.values()) {
+            // Only process PermanentNote and LitNote
+            if (note instanceof PermanentNote) {
+                PermanentNote permanentNote = (PermanentNote) note; // Cast to PermanentNote
+                if (permanentNote.getLinks() != null && !permanentNote.getLinks().isEmpty()) {
+                    for (String linkedNoteID : permanentNote.getLinks()) {
+                        // Add the current note to the backlinksIndex for the linked note ID
+                        backlinksIndex.computeIfAbsent(linkedNoteID, k -> new HashSet<>()).add(permanentNote);
+
+                        // Debug: Print the backlink being added
+                        System.out.println("Backlink added: " + permanentNote.getUniqueID() + " -> " + linkedNoteID);
+                    }
+                }
+            } else if (note instanceof LitNote) {
+                LitNote litNote = (LitNote) note; // Cast to LitNote
+                if (litNote.getLinks() != null && !litNote.getLinks().isEmpty()) {
+                    for (String linkedNoteID : litNote.getLinks()) {
+                        // Add the current note to the backlinksIndex for the linked note ID
+                        backlinksIndex.computeIfAbsent(linkedNoteID, k -> new HashSet<>()).add(litNote);
+
+                        // Debug: Print the backlink being added
+                        System.out.println("Backlink added: " + litNote.getUniqueID() + " -> " + linkedNoteID);
+                    }
+                }
+            }
+        }
+
+        // Debug: Print completion message
+        System.out.println("Backlinks index rebuilt successfully.");
+    }
+    
 }
