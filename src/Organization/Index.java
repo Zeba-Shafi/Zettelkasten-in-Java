@@ -30,7 +30,7 @@ public class Index {
             return;
         }
 
-        List<Note> notes = new ArrayList<>();
+        System.out.println("Starting indexing in directory: " + directory);
 
         // Iterate through all files in the directory
         for (File file : folder.listFiles()) {
@@ -38,22 +38,43 @@ public class Index {
                 String filename = file.getName();
                 String filePath = file.getAbsolutePath();
 
+                // Debug: Print the file being processed
+                System.out.println("Processing file: " + filename);
+
                 // Determine the type of note based on the filename
                 if (filename.startsWith("FleetingNote_")) {
                     FleetingNote fleetingNote = NoteCreator.createFleetingNote(filePath);
-                    notes.add(fleetingNote); // Create a FleetingNote object
+                    if (fleetingNote != null) {
+                        indexNote(fleetingNote);
+                        System.out.println("Indexed FleetingNote: " + fleetingNote.getUniqueID());
+                    } else {
+                        System.err.println("Failed to create FleetingNote from file: " + filename);
+                    }
                 } else if (filename.startsWith("PermanentNote_")) {
-                    FleetingNote permNote = NoteCreator.createFleetingNote(filePath);
-                    notes.add(permNote); // Create a PermanentNote object
+                    PermanentNote permNote = NoteCreator.createPermanentNote(filePath);
+                    if (permNote != null) {
+                        indexNote(permNote);
+                        System.out.println("Indexed PermanentNote: " + permNote.getUniqueID());
+                    } else {
+                        System.err.println("Failed to create PermanentNote from file: " + filename);
+                    }
                 } else if (filename.startsWith("LiteratureNote_")) {
                     LitNote litNote = NoteCreator.createLitNote(filePath);
-                    notes.add(litNote); // Create a LitNote object
+                    if (litNote != null) {
+                        indexNote(litNote);
+                        System.out.println("Indexed LiteratureNote: " + litNote.getUniqueID());
+                    } else {
+                        System.err.println("Failed to create LiteratureNote from file: " + filename);
+                    }
+                } else {
+                    System.out.println("Skipping unknown file type: " + filename);
                 }
+            } else {
+                System.out.println("Skipping non-md file: " + file.getName());
             }
         }
 
-        // Process all notes with the buildIndex() method
-        buildIndex(notes);
+        System.out.println("Indexing completed.");
     }
 
     // Build the index from a collection of notes
@@ -81,6 +102,10 @@ public class Index {
 
     // Index links in a LitNote
     public void indexLitNoteLinks(LitNote note) {
+        if (note.getLinks() == null || note.getLinks().isEmpty()) {
+            return; // No links to process
+        }
+
         for (String link : note.getLinks()) {
             Note linkedNote = notesByID.get(link);
             if (linkedNote != null) {
@@ -95,6 +120,10 @@ public class Index {
 
     // Index links in a PermanentNote
     public void indexPermanentNoteLinks(PermanentNote note) {
+        if (note.getLinks() == null || note.getLinks().isEmpty()) {
+            return; // No links to process
+        }
+
         for (String link : note.getLinks()) {
             Note linkedNote = notesByID.get(link);
             if (linkedNote != null) {
@@ -176,10 +205,10 @@ public class Index {
 
             // Remove backlinks
             backlinksIndex.remove(noteID);
+
             // Remove links from other notes
             for (Set<Note> linkedNotes : backlinksIndex.values()) {
                 linkedNotes.remove(note);
-                // remove uuid from the links field in the note
                 for (Note linkedNote : linkedNotes) {
                     if (linkedNote instanceof LitNote) {
                         ((LitNote) linkedNote).deleteLink(noteID);
@@ -189,10 +218,19 @@ public class Index {
                 }
             }
 
-            // call delete method on note itself
+            // Call delete method on the note itself
             note.delete();
         }
-    // Get all notes
+    }
+
+    public Note getNoteByID(String idString) {
+        // Search the notesByID map for a matching Note with the given ID
+        if (notesByID.containsKey(idString)) {
+            return notesByID.get(idString);
+        } else {
+            System.err.println("Note with ID " + idString + " not found.");
+            return null; // Return null if the note is not found
+        }
     }
 
     public void addNote(Note note) {
@@ -213,6 +251,7 @@ public class Index {
                 ((PermanentNote) note).deleteLink(linkedNoteID);
             }
         }
+
         // Remove the sourcelink from the backlinks index
         Set<Note> linkedNotes = backlinksIndex.get(linkedNoteID);
         if (linkedNotes != null) {
@@ -221,7 +260,6 @@ public class Index {
                 backlinksIndex.remove(linkedNoteID);
             }
         }
-       
     }
 
     public void addLink(String sourcednoteID, String linkedNoteID) {

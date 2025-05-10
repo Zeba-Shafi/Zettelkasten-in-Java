@@ -8,12 +8,12 @@ import MDHandler.*;
 
 public class PermanentNote extends Note {
 
-    private ArrayList<String> links = new ArrayList<>();
+    private ArrayList<String> links = new ArrayList<>(); // Initialize to an empty list
     private ArrayList<String> backlinks = new ArrayList<>();
 
     public PermanentNote(String title, String content, ArrayList<String> tags, String dateCreated,ArrayList<String> links) {
         super(title, content, tags, dateCreated);
-        if (links != null && !links.isEmpty()) { this.links = links;}
+        if (links != null && !links.isEmpty()) {this.links = links;}
         this.filePath =  "Zettelkasten\\PermanentNote_" + this.uniqueID + ".md"; // Example file path for saving the note
         //create the md file
         MDWriter.writePermanentNote(this);

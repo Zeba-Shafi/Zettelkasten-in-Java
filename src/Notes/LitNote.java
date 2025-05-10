@@ -11,7 +11,7 @@ public class LitNote extends Note {
 
     private String sourceURL;
     private String citation;
-    private ArrayList<String> links = new ArrayList<>();
+    private ArrayList<String> links = new ArrayList<>(); // Initialize to an empty list
 
     public LitNote(String title, String content, ArrayList<String> tags, String dateCreated, String citation, String sourceURL, ArrayList<String> links) {
         super(title, content, tags, dateCreated);

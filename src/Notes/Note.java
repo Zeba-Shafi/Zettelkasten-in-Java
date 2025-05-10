@@ -35,7 +35,7 @@ public abstract class Note {
         Map<String,String> metadata = MDParser.extractYamlMetadata(filepath);
         this.content = MDParser.extractContent(filepath);
         this.tags = new ArrayList<String>(Arrays.asList(metadata.get("tags").split(","))); // Split tags by comma and convert to ArrayList
-        this.uniqueID = metadata.get("uniqueID");
+        this.uniqueID = metadata.get("NoteID");
         this.title = metadata.get("title");
         this.dateCreated = metadata.get("dateCreated");
         this.dateModified = metadata.get("dateModified");
